@@ -1,4 +1,4 @@
-# Who Is Lying
+# Word Trap
 
 A real-time multiplayer bluffing game where players must identify an imposter among them. One player is secretly assigned the role of imposter and must blend in without knowing the secret word that all other players share.
 
@@ -26,7 +26,7 @@ https://whoislyingfrontend.onrender.com
 
 ### Game Concept
 
-Who Is Lying is a social deduction game inspired by party games like Spyfall and Werewolf. Players join a room and are assigned roles: one player becomes the **imposter**, while all others are **regular players**. Regular players receive a secret word within a given topic, but the imposter only knows the topic—not the word itself.
+Word Trap is a social deduction game inspired by party games like Spyfall and Werewolf. Players join a room and are assigned roles: one player becomes the **imposter**, while all others are **regular players**. Regular players receive a secret word within a given topic, but the imposter only knows the topic—not the word itself.
 
 Each player submits an anonymous description of the word. The imposter must craft a convincing bluff without knowing what they are describing. After all descriptions are revealed (in randomized order), players vote on who they believe is the imposter.
 
