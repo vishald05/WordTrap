@@ -44,14 +44,14 @@ export default function EndGameButton() {
                 onClick={() => setShowConfirm(true)}
                 title="End the current game"
             >
-                🛑 End Game
+                End game
             </button>
             
             {/* Confirmation Modal */}
             {showConfirm && (
                 <div className="end-game-modal-overlay" onClick={() => setShowConfirm(false)}>
                     <div className="end-game-modal" onClick={e => e.stopPropagation()}>
-                        <h3>⚠️ End Game?</h3>
+                        <h3>End game?</h3>
                         <p>Are you sure you want to end the game?</p>
                         <p className="warning-text">This will reveal the imposter to all players.</p>
                         

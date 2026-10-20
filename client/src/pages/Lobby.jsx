@@ -108,7 +108,7 @@ export default function Lobby() {
                             />
                             <span className="player-info">
                                 {p.name}
-                                {p.id === room.hostId && <span className="host-badge">👑 Host</span>}
+                                {p.id === room.hostId && <span className="host-badge">Host</span>}
                                 {p.id === player.id && <span className="you-badge">(You)</span>}
                             </span>
                         </li>
@@ -118,7 +118,7 @@ export default function Lobby() {
             
             {/* V1.2: Game Settings Panel */}
             <div className="settings-panel">
-                <h3>⚙️ Game Settings</h3>
+                <h3>Game Settings</h3>
                 
                 {isHost ? (
                     <>

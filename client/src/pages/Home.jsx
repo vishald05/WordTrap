@@ -49,7 +49,7 @@ export default function Home() {
 
     return (
         <div className="page home">
-            <h1>🎭 Who Is Lying?</h1>
+            <h1>Who Is Lying?</h1>
             
             {!isConnected && (
                 <div className="error">

@@ -98,7 +98,7 @@ export default function VotingPhase() {
     // Chat section component (reused in mobile and desktop layouts)
     const ChatSection = () => (
         <div className="chat-section">
-            <h3>💬 Discussion</h3>
+            <h3>Discussion</h3>
             <div className="chat-messages">
                 {chatMessages.length === 0 ? (
                     <p className="chat-empty">No messages yet. Discuss who the imposter might be!</p>
@@ -145,7 +145,7 @@ export default function VotingPhase() {
                 LEFT PANEL - Players List for Voting (Desktop: left sidebar)
                 ================================================================= */}
             <div className="game-panel-left">
-                <h3>🗳️ Vote for Imposter</h3>
+                <h3>Vote for imposter</h3>
                 
                 <div className="vote-buttons">
                     {room.players.map((p) => (
@@ -182,14 +182,14 @@ export default function VotingPhase() {
                             onClick={handleConfirm}
                             className="primary confirm-btn"
                         >
-                            🔒 Confirm Vote
+                            Confirm vote
                         </button>
                     </div>
                 )}
                 
                 {hasConfirmedVote && (
                     <div className="voted-message">
-                        <p>✅ Vote confirmed!</p>
+                        <p>Vote confirmed</p>
                         <p>Voted for: <strong>{selectedPlayer?.name}</strong></p>
                     </div>
                 )}
@@ -207,7 +207,7 @@ export default function VotingPhase() {
                     <div className="mobile-only">
                         {timer.phase === 'voting' && timer.remainingSeconds > 0 && (
                             <div className={`timer ${timer.remainingSeconds <= 10 ? 'timer-warning' : ''}`}>
-                                ⏱️ {timer.remainingSeconds}s
+                                {timer.remainingSeconds}s
                             </div>
                         )}
                     </div>
@@ -280,7 +280,7 @@ export default function VotingPhase() {
                                                     onClick={handleConfirm}
                                                     className="primary confirm-btn"
                                                 >
-                                                    🔒 Confirm Vote
+                                                    Confirm vote
                                                 </button>
                                                 <p className="confirm-hint">
                                                     You can change your selection until you confirm
@@ -296,7 +296,7 @@ export default function VotingPhase() {
                                     </div>
                                 ) : (
                                     <div className="voted-message">
-                                        <p>✅ Vote confirmed for {selectedPlayer?.name}!</p>
+                                        <p>Vote confirmed for {selectedPlayer?.name}</p>
                                         <p>Waiting for other players...</p>
                                     </div>
                                 )}
@@ -317,7 +317,7 @@ export default function VotingPhase() {
                 RIGHT PANEL - Timer & Progress (Desktop only)
                 ================================================================= */}
             <div className="game-panel-right desktop-only">
-                <h3>⏱️ Time Remaining</h3>
+                <h3>Time remaining</h3>
                 {timer.phase === 'voting' && timer.remainingSeconds > 0 ? (
                     <div className={`timer ${timer.remainingSeconds <= 10 ? 'timer-warning' : ''}`}>
                         {timer.remainingSeconds}s

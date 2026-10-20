@@ -72,7 +72,7 @@ export default function RoleReveal() {
                     <div className="mobile-only">
                         {timer.phase === 'roleReveal' && timer.remainingSeconds > 0 && (
                             <div className="timer">
-                                ⏱️ {timer.remainingSeconds}s
+                                {timer.remainingSeconds}s
                             </div>
                         )}
                     </div>
@@ -91,13 +91,13 @@ export default function RoleReveal() {
                     
                     {isImposter ? (
                         <div className="role imposter">
-                            <h3>🎭 You are the IMPOSTER!</h3>
+                            <h3>You are the imposter</h3>
                             <p>You don't know the secret word.</p>
                             <p>Try to blend in with your description!</p>
                         </div>
                     ) : (
                         <div className="role regular">
-                            <h3>✅ You are a regular player</h3>
+                            <h3>You are a regular player</h3>
                             <div className="secret-word">
                                 <span>The secret word is:</span>
                                 <strong>{secretWord}</strong>
@@ -125,7 +125,7 @@ export default function RoleReveal() {
                 RIGHT PANEL - Timer & Host Controls (Desktop only)
                 ================================================================= */}
             <div className="game-panel-right desktop-only">
-                <h3>⏱️ Time Remaining</h3>
+                <h3>Time remaining</h3>
                 {timer.phase === 'roleReveal' && timer.remainingSeconds > 0 ? (
                     <div className="timer">
                         {timer.remainingSeconds}s

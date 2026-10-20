@@ -48,7 +48,7 @@ export default function Results() {
                 ================================================================= */}
             <div className="game-panel-left">
                 <div className="vote-summary">
-                    <h3>🗳️ Vote Summary</h3>
+                    <h3>Vote summary</h3>
                     <ul>
                         {voteSummary.map((entry) => (
                             <li key={entry.playerId} className={entry.playerId === imposter.id ? 'imposter' : ''}>
@@ -60,7 +60,7 @@ export default function Results() {
                                 />
                                 <span className="player-vote-info">
                                     {entry.playerName}: {entry.votes} vote{entry.votes !== 1 ? 's' : ''}
-                                    {entry.playerId === imposter.id && <span className="imposter-tag"> 🎭</span>}
+                                    {entry.playerId === imposter.id && <span className="imposter-tag">Imposter</span>}
                                 </span>
                             </li>
                         ))}
@@ -77,23 +77,23 @@ export default function Results() {
                     
                     <div className={`result-banner ${playersWin ? 'players-win' : 'imposter-wins'}`}>
                         {playersWin ? (
-                            <h3>🎉 Players Win!</h3>
+                            <h3>Players win</h3>
                         ) : (
-                            <h3>🎭 Imposter Wins!</h3>
+                            <h3>Imposter wins</h3>
                         )}
                     </div>
                     
                     <div className="personal-result">
                         {didIWin ? (
-                            <p className="win">🏆 You won!</p>
+                            <p className="win">You won</p>
                         ) : (
-                            <p className="lose">😔 You lost!</p>
+                            <p className="lose">You lost</p>
                         )}
                     </div>
                     
                     {/* Imposter Reveal Card - Visual focal point */}
                     <div className="imposter-reveal-card">
-                        <p className="reveal-label">🕵️ The Imposter Was</p>
+                        <p className="reveal-label">The imposter was</p>
                         <div className="imposter-avatar-container">
                             <Avatar 
                                 seed={imposter.id || imposter.name}
@@ -140,7 +140,7 @@ export default function Results() {
                                         />
                                         <span className="player-vote-info">
                                             {entry.playerName}: {entry.votes} vote{entry.votes !== 1 ? 's' : ''}
-                                            {entry.playerId === imposter.id && <span className="imposter-tag"> 🎭</span>}
+                                            {entry.playerId === imposter.id && <span className="imposter-tag">Imposter</span>}
                                         </span>
                                     </li>
                                 ))}
@@ -177,7 +177,7 @@ export default function Results() {
                 </div>
                 
                 <div className="phase-info">
-                    <h3>🎮 What Happened</h3>
+                    <h3>What happened</h3>
                     <div className="info-box">
                         {playersWin ? (
                             <p>The players correctly identified <strong>{imposter.name}</strong> as the imposter!</p>

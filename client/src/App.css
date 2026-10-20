@@ -1,2231 +1,369 @@
-/**
- * Basic CSS Styles
- * 
- * Minimal styling for usability.
- * No libraries, just plain CSS.
- */
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+:root {
+    --ink: #202326;
+    --muted: #6e716f;
+    --paper: #f5f1e8;
+    --surface: #fffdf8;
+    --surface-muted: #ece8de;
+    --line: #d8d2c5;
+    --accent: #c9543d;
+    --accent-dark: #9f3d2d;
+    --sage: #587565;
+    --sage-light: #e4ede6;
+    --warning: #b87932;
+    --shadow: 0 12px 30px rgba(50, 44, 35, .08);
+    --radius: 6px;
 }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { background: var(--paper); }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-    background: #1a1a2e;
-    color: #eee;
+    min-width: 320px;
     min-height: 100vh;
+    color: var(--ink);
+    background:
+        linear-gradient(rgba(110, 95, 70, .035) 1px, transparent 1px),
+        var(--paper);
+    background-size: 100% 36px;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.5;
 }
 
-.app {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+button, input, textarea { font: inherit; }
+button { cursor: pointer; }
+button:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 3px solid rgba(201, 84, 61, .32);
+    outline-offset: 2px;
 }
 
-.container {
-    width: 100%;
-    max-width: 500px;
-}
-
-/* =============================================================================
-   PAGE STYLES
-   ============================================================================= */
+.app { min-height: 100vh; padding: 32px 20px; }
+.container { width: 100%; max-width: 560px; margin: 0 auto; }
 
 .page {
-    background: #16213e;
-    border-radius: 12px;
-    padding: 30px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    padding: clamp(24px, 5vw, 42px);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
 }
 
-.page h1 {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 30px;
-    color: #e94560;
+.page h1, .page h2, .page h3 {
+    color: var(--ink);
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 700;
 }
+.page h1 { margin-bottom: 30px; font-size: clamp(2rem, 7vw, 3rem); letter-spacing: -.04em; line-height: 1; }
+.page h2 { margin-bottom: 26px; font-size: 1.8rem; letter-spacing: -.025em; }
+.page h3 { margin-bottom: 12px; font-size: 1.05rem; }
+.home h1 { text-align: left; color: var(--accent); }
 
-.page h2 {
-    text-align: center;
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    color: #fff;
-}
-
-.page h3 {
-    font-size: 1.1rem;
-    margin-bottom: 15px;
-    color: #ccc;
-}
-
-/* =============================================================================
-   FORMS
-   ============================================================================= */
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
+.form-group { margin-bottom: 20px; }
+.form-group label, .setting-row label {
     display: block;
-    margin-bottom: 8px;
-    color: #aaa;
-    font-size: 0.9rem;
+    margin-bottom: 7px;
+    color: var(--muted);
+    font-size: .76rem;
+    font-weight: 750;
+    letter-spacing: .08em;
+    text-transform: uppercase;
 }
-
-.form-group input,
-.form-group textarea {
+.form-group input, .form-group textarea,
+.setting-input-group input, .chat-input-form input {
     width: 100%;
-    padding: 12px 15px;
-    border: 2px solid #0f3460;
-    border-radius: 8px;
-    background: #0f3460;
-    color: #fff;
-    font-size: 1rem;
-    outline: none;
-    transition: border-color 0.2s;
+    min-height: 46px;
+    padding: 10px 13px;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    transition: border-color .15s, box-shadow .15s;
 }
-
-.form-group input:focus,
-.form-group textarea:focus {
-    border-color: #e94560;
+.form-group textarea { min-height: 100px; resize: vertical; }
+.form-group input:focus, .form-group textarea:focus,
+.setting-input-group input:focus, .chat-input-form input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(201, 84, 61, .12);
+    outline: 0;
 }
+input::placeholder, textarea::placeholder { color: #a8a49c; }
+input:disabled, textarea:disabled { cursor: not-allowed; opacity: .55; }
 
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-    color: #666;
-}
-
-.form-group input:disabled,
-.form-group textarea:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-/* =============================================================================
-   BUTTONS
-   ============================================================================= */
-
-.button-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
+.button-group { display: flex; flex-direction: column; gap: 10px; }
 button {
-    padding: 12px 20px;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.2s;
-    background: #0f3460;
-    color: #fff;
+    min-height: 44px;
+    padding: 10px 18px;
+    color: var(--ink);
+    background: var(--surface-muted);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    font-weight: 700;
+    transition: background .15s, border-color .15s, transform .15s;
 }
+button:hover:not(:disabled) { background: #e3ded3; border-color: #bdb5a7; }
+button:active:not(:disabled) { transform: translateY(1px); }
+button.primary { color: #fff; background: var(--accent); border-color: var(--accent); }
+button.primary:hover:not(:disabled) { background: var(--accent-dark); border-color: var(--accent-dark); }
+button:disabled { cursor: not-allowed; opacity: .48; }
 
-button:hover:not(:disabled) {
-    background: #1a4a7a;
-}
-
-button.primary {
-    background: #e94560;
-}
-
-button.primary:hover:not(:disabled) {
-    background: #ff6b8a;
-}
-
-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-/* =============================================================================
-   ERROR MESSAGES
-   ============================================================================= */
-
-.error {
-    background: #e94560;
-    color: #fff;
-    padding: 12px 15px;
-    border-radius: 8px;
+.error, .settings-error {
     margin-bottom: 20px;
+    padding: 11px 13px;
+    color: #8c3024;
+    background: #f9e5df;
+    border: 1px solid #e9bdb3;
+    border-radius: var(--radius);
+    font-size: .9rem;
+}
+
+.room-code, .topic-display {
+    margin-bottom: 24px;
+    padding: 16px;
     text-align: center;
+    background: var(--surface-muted);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
 }
+.room-code span, .topic-display span { display: block; margin-bottom: 4px; color: var(--muted); font-size: .75rem; font-weight: 750; letter-spacing: .1em; text-transform: uppercase; }
+.room-code strong { color: var(--accent); font-family: Georgia, serif; font-size: 2.1rem; letter-spacing: .18em; }
+.topic-display strong { font-family: Georgia, serif; font-size: 1.55rem; }
 
-/* =============================================================================
-   LOBBY STYLES
-   ============================================================================= */
-
-.room-code {
-    text-align: center;
-    margin-bottom: 25px;
-    padding: 15px;
-    background: #0f3460;
-    border-radius: 8px;
-}
-
-.room-code span {
-    display: block;
-    color: #aaa;
-    font-size: 0.9rem;
-    margin-bottom: 5px;
-}
-
-.room-code strong {
-    font-size: 2rem;
-    letter-spacing: 5px;
-    color: #e94560;
-}
-
-.player-list {
-    margin-bottom: 25px;
-}
-
-.player-list ul {
-    list-style: none;
-}
-
-.player-list li {
-    padding: 10px 15px;
-    background: #0f3460;
-    margin-bottom: 5px;
-    border-radius: 6px;
+.player-list, .settings-panel, .last-game-summary { margin-bottom: 26px; }
+.player-list ul, .vote-summary ul, .descriptions-list ul, .live-descriptions ul { list-style: none; }
+.player-list li, .vote-summary li {
     display: flex;
     align-items: center;
-    gap: 10px;
-}
-
-.player-list li.you {
-    border-left: 3px solid #e94560;
-}
-
-.host-badge {
-    font-size: 0.8rem;
-    color: #ffd700;
-}
-
-.you-badge {
-    font-size: 0.8rem;
-    color: #888;
-}
-
-.waiting-message {
-    text-align: center;
-    color: #888;
-    font-style: italic;
-    margin-top: 15px;
-}
-
-.host-controls {
-    text-align: center;
-}
-
-/* =============================================================================
-   ROLE REVEAL STYLES
-   ============================================================================= */
-
-.topic-display {
-    text-align: center;
-    margin-bottom: 25px;
-    padding: 15px;
-    background: #0f3460;
-    border-radius: 8px;
-}
-
-.topic-display span {
-    display: block;
-    color: #aaa;
-    font-size: 0.9rem;
-    margin-bottom: 5px;
-}
-
-.topic-display strong {
-    font-size: 1.5rem;
-    color: #fff;
-}
-
-.role {
-    text-align: center;
-    padding: 25px;
-    border-radius: 8px;
-    margin-bottom: 25px;
-}
-
-.role.imposter {
-    background: linear-gradient(135deg, #e94560 0%, #8b1538 100%);
-}
-
-.role.regular {
-    background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
-    border: 2px solid #0f3460;
-}
-
-.role h3 {
-    color: #fff;
-    margin-bottom: 15px;
-}
-
-.role p {
-    color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 10px;
-}
-
-.secret-word {
-    margin: 15px 0;
-    padding: 15px;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 6px;
-}
-
-.secret-word span {
-    display: block;
-    color: #aaa;
-    font-size: 0.9rem;
-    margin-bottom: 5px;
-}
-
-.secret-word strong {
-    font-size: 1.5rem;
-    color: #4ade80;
-}
-
-/* =============================================================================
-   DESCRIPTION PHASE STYLES
-   ============================================================================= */
-
-.word-reminder {
-    text-align: center;
-    padding: 10px;
-    background: #0f3460;
-    border-radius: 6px;
-    margin-bottom: 20px;
-}
-
-.word-reminder strong {
-    color: #4ade80;
-}
-
-.imposter-reminder {
-    text-align: center;
-    padding: 10px;
-    background: #e94560;
-    border-radius: 6px;
-    margin-bottom: 20px;
-}
-
-.description-form {
-    margin-bottom: 20px;
-}
-
-.description-form textarea {
-    resize: vertical;
-    min-height: 80px;
-}
-
-.submitted-message {
-    text-align: center;
-    padding: 20px;
-    background: #0f3460;
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
-
-.submitted-message p:first-child {
-    color: #4ade80;
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-}
-
-.progress {
-    text-align: center;
-    color: #888;
-    padding: 10px;
-    background: #0f3460;
-    border-radius: 6px;
-}
-
-/* =============================================================================
-   VOTING PHASE STYLES
-   ============================================================================= */
-
-.descriptions-list {
-    margin-bottom: 25px;
-}
-
-.descriptions-list ul {
-    list-style: none;
-}
-
-.descriptions-list li {
-    padding: 12px 15px;
-    background: #0f3460;
-    margin-bottom: 8px;
-    border-radius: 6px;
-    font-style: italic;
-    color: #ccc;
-}
-
-.voting-section {
-    margin-bottom: 20px;
-}
-
-.vote-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.vote-buttons button {
-    text-align: left;
-}
-
-.vote-buttons button.disabled {
-    opacity: 0.4;
-}
-
-.voted-message {
-    text-align: center;
-    padding: 20px;
-    background: #0f3460;
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
-
-.voted-message p:first-child {
-    color: #4ade80;
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-}
-
-/* =============================================================================
-   V1.1: ENHANCED VOTING STYLES
-   ============================================================================= */
-
-.vote-buttons button.selected {
-    background: #e94560;
-    border: 2px solid #ff6b8a;
-    box-shadow: 0 0 10px rgba(233, 69, 96, 0.4);
-}
-
-.confirm-section {
-    margin-top: 20px;
-    padding: 20px;
-    background: #0a1628;
-    border-radius: 8px;
-    border: 1px solid #0f3460;
-    text-align: center;
-}
-
-.selection-preview {
-    margin-bottom: 15px;
-    font-size: 1.1rem;
-}
-
-.selection-preview strong {
-    color: #e94560;
-}
-
-.confirm-btn {
-    width: 100%;
-    padding: 15px !important;
-    font-size: 1.1rem !important;
-}
-
-.confirm-hint {
-    margin-top: 10px;
-    color: #666;
-    font-size: 0.85rem;
-}
-
-.selection-hint {
-    text-align: center;
-    color: #888;
-    font-style: italic;
-    margin-top: 15px;
-}
-
-/* =============================================================================
-   V1.1: VOTING CHAT STYLES
-   ============================================================================= */
-
-.voting-chat-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.voting-section-wrapper {
-    flex: 1;
-}
-
-.chat-section {
-    background: #0a1628;
-    border-radius: 8px;
-    padding: 15px;
-    border: 1px solid #0f3460;
-}
-
-.chat-section h3 {
-    margin-bottom: 10px;
-    font-size: 1rem;
-}
-
-.chat-messages {
-    height: 150px;
-    overflow-y: auto;
-    background: #0f3460;
-    border-radius: 6px;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-.chat-empty {
-    color: #666;
-    font-style: italic;
-    text-align: center;
-    padding: 20px 0;
-}
-
-.chat-message {
-    margin-bottom: 8px;
-    font-size: 0.9rem;
-    line-height: 1.4;
-}
-
-.chat-message.own {
-    text-align: right;
-}
-
-.chat-sender {
-    color: #e94560;
-    font-weight: bold;
-    margin-right: 5px;
-}
-
-.chat-message.own .chat-sender {
-    color: #4cc9f0;
-}
-
-.chat-text {
-    color: #ccc;
-}
-
-.chat-input-form {
-    display: flex;
-    gap: 8px;
-}
-
-.chat-input-form input {
-    flex: 1;
-    padding: 10px 12px;
-    border: 2px solid #0f3460;
-    border-radius: 6px;
-    background: #0f3460;
-    color: #fff;
-    font-size: 0.9rem;
-    outline: none;
-}
-
-.chat-input-form input:focus {
-    border-color: #e94560;
-}
-
-.chat-input-form button {
-    padding: 10px 16px;
-    background: #e94560;
-    border-radius: 6px;
-    font-size: 0.9rem;
-}
-
-.chat-input-form button:disabled {
-    opacity: 0.5;
-}
-
-.chat-error {
-    color: #e94560;
-    font-size: 0.8rem;
-    margin-top: 5px;
-    text-align: center;
-}
-
-/* =============================================================================
-   RESULTS STYLES
-   ============================================================================= */
-
-.result-banner {
-    text-align: center;
-    padding: 25px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
-
-.result-banner.players-win {
-    background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
-}
-
-.result-banner.imposter-wins {
-    background: linear-gradient(135deg, #e94560 0%, #8b1538 100%);
-}
-
-.result-banner h3 {
-    color: #fff;
-    font-size: 1.5rem;
-    margin: 0;
-}
-
-.personal-result {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.personal-result .win {
-    color: #4ade80;
-    font-size: 1.2rem;
-}
-
-.personal-result .lose {
-    color: #f87171;
-    font-size: 1.2rem;
-}
-
-.result-details {
-    margin-bottom: 25px;
-}
-
-.detail-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 12px 15px;
-    background: #0f3460;
-    margin-bottom: 8px;
-    border-radius: 6px;
-}
-
-.detail-item span {
-    color: #888;
-}
-
-.detail-item strong {
-    color: #fff;
-}
-
-.vote-summary {
-    margin-bottom: 25px;
-}
-
-.vote-summary ul {
-    list-style: none;
-}
-
-.vote-summary li {
-    padding: 10px 15px;
-    background: #0f3460;
-    margin-bottom: 5px;
-    border-radius: 6px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.imposter-tag {
-    color: #e94560;
-}
-
-.restart-hint {
-    text-align: center;
-    color: #666;
-    font-size: 0.9rem;
-    font-style: italic;
-}
-
-.transition-hint {
-    text-align: center;
-    color: #4cc9f0;
-    font-size: 0.9rem;
-    font-style: italic;
-    animation: fadeInOut 2s infinite;
-}
-
-@keyframes fadeInOut {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
-}
-
-/* =============================================================================
-   TIMER STYLES
-   ============================================================================= */
-
-.timer {
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: bold;
-    padding: 10px 20px;
-    background: #0f3460;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    color: #4cc9f0;
-}
-
-.timer-warning {
-    color: #e94560;
-    background: #2a1a2a;
-    animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.6;
-    }
-}
-
-/* =============================================================================
-   V1.1: SEQUENTIAL DESCRIPTION PHASE STYLES
-   ============================================================================= */
-
-.speaking-order {
-    margin-bottom: 20px;
-    padding: 15px;
-    background: #0f3460;
-    border-radius: 8px;
-}
-
-.speaking-order h3 {
-    margin-bottom: 12px;
-    text-align: center;
-}
-
-.order-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: center;
-}
-
-.speaker-item {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    padding: 6px 12px;
-    background: #16213e;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    transition: all 0.3s;
-}
-
-.speaker-item .speaker-number {
-    color: #666;
-    font-weight: bold;
-}
-
-.speaker-item .speaker-name {
-    color: #aaa;
-}
-
-.speaker-item.current {
-    background: #e94560;
-    box-shadow: 0 0 15px rgba(233, 69, 96, 0.5);
-}
-
-.speaker-item.current .speaker-name {
-    color: #fff;
-    font-weight: bold;
-}
-
-.speaker-item.done {
-    background: #1a4a3a;
-}
-
-.speaker-item.done .speaker-name {
-    color: #4ade80;
-}
-
-.speaker-item .check {
-    color: #4ade80;
-}
-
-.speaker-item .speaking {
-    animation: bounce 0.5s infinite alternate;
-}
-
-@keyframes bounce {
-    from { transform: translateY(0); }
-    to { transform: translateY(-3px); }
-}
-
-.speaker-item.is-me {
-    border: 2px solid #e94560;
-}
-
-.current-speaker-banner {
-    text-align: center;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    background: #0f3460;
-    font-size: 1.1rem;
-}
-
-.current-speaker-banner.your-turn {
-    background: linear-gradient(135deg, #e94560 0%, #8b1538 100%);
-    animation: glow 1s infinite alternate;
-}
-
-@keyframes glow {
-    from { box-shadow: 0 0 10px rgba(233, 69, 96, 0.3); }
-    to { box-shadow: 0 0 20px rgba(233, 69, 96, 0.6); }
-}
-
-.current-speaker-banner strong {
-    color: #fff;
-}
-
-.live-descriptions {
-    margin-top: 25px;
-    padding: 15px;
-    background: #0a1628;
-    border-radius: 8px;
-    border: 1px solid #0f3460;
-}
-
-.live-descriptions h3 {
-    margin-bottom: 12px;
-    color: #888;
-}
-
-.live-descriptions ul {
-    list-style: none;
-}
-
-.live-descriptions li {
-    padding: 10px 12px;
-    background: #0f3460;
-    margin-bottom: 6px;
-    border-radius: 6px;
-    font-size: 0.95rem;
-}
-
-.live-descriptions li strong {
-    color: #4cc9f0;
-}
-
-.live-descriptions li.auto-submit {
-    opacity: 0.6;
-    font-style: italic;
-}
-
-.description-form .hint {
-    text-align: center;
-    color: #666;
-    font-size: 0.85rem;
-    margin-top: 10px;
-}
-
-/* =============================================================================
-   V1.1: POST GAME STYLES
-   ============================================================================= */
-
-.post-game h2 {
-    text-align: center;
-    margin-bottom: 25px;
-}
-
-.last-game-summary {
-    margin-bottom: 25px;
-    padding: 15px;
-    background: #0a1628;
-    border-radius: 8px;
-    border: 1px solid #0f3460;
-}
-
-.last-game-summary h3 {
-    text-align: center;
-    margin-bottom: 15px;
-    color: #888;
-}
-
-.result-mini {
-    text-align: center;
-    padding: 12px;
-    border-radius: 6px;
-    font-weight: bold;
-    font-size: 1.1rem;
-    margin-bottom: 15px;
-}
-
-.result-mini.players-win {
-    background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
-    color: #fff;
-}
-
-.result-mini.imposter-wins {
-    background: linear-gradient(135deg, #e94560 0%, #8b1538 100%);
-    color: #fff;
-}
-
-.summary-details {
-    text-align: center;
-    color: #aaa;
-}
-
-.summary-details p {
-    margin: 5px 0;
-}
-
-.summary-details strong {
-    color: #fff;
-}
-
-.game-count {
-    text-align: center;
-    padding: 10px;
-    background: #0f3460;
-    border-radius: 6px;
-    margin-bottom: 20px;
-    color: #4cc9f0;
-    font-size: 0.9rem;
-}
-
-.play-again-btn {
-    width: 100%;
-    padding: 15px !important;
-    font-size: 1.2rem !important;
-}
-
-.invite-hint {
-    text-align: center;
-    color: #666;
-    font-size: 0.9rem;
-    margin-top: 20px;
-}
-
-.invite-hint strong {
-    color: #e94560;
-    letter-spacing: 2px;
-}
-
-/* =============================================================================
-   V1.2: DESKTOP RESPONSIVE LAYOUT
-   
-   Strategy: Use CSS Grid to reposition existing elements on desktop (≥1024px)
-   while keeping the mobile vertical stacked layout completely unchanged.
-   
-   No conditional rendering—purely CSS-based responsive design.
-   ============================================================================= */
-
-/* -----------------------------------------------------------------------------
-   DESKTOP CONTAINER ADJUSTMENTS
-   ----------------------------------------------------------------------------- */
-
-/* On desktop, expand the container to use more horizontal space */
-@media (min-width: 1024px) {
-    .app {
-        align-items: flex-start;
-        padding: 30px;
-    }
-    
-    .container {
-        max-width: 1400px;
-    }
-}
-
-/* -----------------------------------------------------------------------------
-   GAME LAYOUT - Desktop Grid Structure
-   
-   Grid Areas:
-   - left: Players list panel (fixed width)
-   - center: Main game content (flexible)
-   - right: Phase info, actions (fixed width)
-   - bottom: Chat panel (full width)
-   ----------------------------------------------------------------------------- */
+    gap: 11px;
+    min-height: 52px;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--line);
+}
+.player-list li:first-child, .vote-summary li:first-child { border-top: 1px solid var(--line); }
+.player-list li.you { background: #f8ebe6; border-left: 3px solid var(--accent); }
+.player-info { display: flex; flex-wrap: wrap; align-items: baseline; gap: 7px; }
+.host-badge { color: var(--accent); font-size: .75rem; font-weight: 750; }
+.you-badge { color: var(--muted); font-size: .75rem; }
+.waiting-message { margin-top: 17px; color: var(--muted); text-align: center; font-size: .9rem; }
+.host-controls { text-align: center; }
+
+.settings-panel { padding-top: 20px; border-top: 1px solid var(--line); }
+.settings-panel h3 { font-size: 1rem; }
+.settings-form { display: grid; gap: 16px; }
+.setting-row { display: grid; grid-template-columns: 1fr auto; gap: 5px 12px; align-items: center; }
+.setting-row label { grid-column: 1 / -1; margin: 0; }
+.setting-input-group { display: flex; align-items: center; gap: 8px; }
+.setting-input-group input { width: 86px; min-height: 38px; }
+.setting-unit, .setting-hint { color: var(--muted); font-size: .8rem; }
+.setting-hint { grid-column: 1 / -1; }
+.apply-settings-btn { justify-self: start; }
+.settings-readonly { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.setting-display { padding: 12px; background: var(--surface-muted); border-radius: var(--radius); }
+.setting-label { display: block; color: var(--muted); font-size: .75rem; }
+.setting-value { font-weight: 750; }
 
 .game-layout {
-    width: 100%;
-}
-
-/* Desktop: Apply CSS Grid layout */
-@media (min-width: 1024px) {
-    .game-layout {
-        display: grid;
-        grid-template-columns: 280px 1fr 300px;
-        grid-template-rows: 1fr auto;
-        grid-template-areas:
-            "left center right"
-            "bottom bottom bottom";
-        gap: 20px;
-        min-height: calc(100vh - 60px);
-    }
-}
-
-/* -----------------------------------------------------------------------------
-   PANEL STYLES
-   
-   Each panel has base styles (mobile) and desktop overrides.
-   On mobile, panels stack vertically in their DOM order.
-   ----------------------------------------------------------------------------- */
-
-/* Left Panel - Players List */
-.game-panel-left {
-    /* Mobile: normal flow, no special styling */
-}
-
-@media (min-width: 1024px) {
-    .game-panel-left {
-        grid-area: left;
-        background: #16213e;
-        border-radius: 12px;
-        padding: 20px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        max-height: calc(100vh - 180px);
-        overflow-y: auto;
-        position: sticky;
-        top: 30px;
-    }
-    
-    .game-panel-left h3 {
-        margin-bottom: 15px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid #0f3460;
-    }
-}
-
-/* Center Panel - Main Game Content */
-.game-panel-center {
-    /* Mobile: normal flow */
-}
-
-@media (min-width: 1024px) {
-    .game-panel-center {
-        grid-area: center;
-        background: #16213e;
-        border-radius: 12px;
-        padding: 30px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    }
-    
-    /* Center panel should not have max-height to allow content to grow */
-    .game-panel-center .page {
-        background: transparent;
-        box-shadow: none;
-        padding: 0;
-    }
-}
-
-/* Right Panel - Phase Info & Actions */
-.game-panel-right {
-    /* Mobile: normal flow */
-}
-
-@media (min-width: 1024px) {
-    .game-panel-right {
-        grid-area: right;
-        background: #16213e;
-        border-radius: 12px;
-        padding: 20px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        max-height: calc(100vh - 180px);
-        overflow-y: auto;
-        position: sticky;
-        top: 30px;
-    }
-    
-    .game-panel-right h3 {
-        margin-bottom: 15px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid #0f3460;
-    }
-}
-
-/* Bottom Panel - Chat Section */
-.game-panel-bottom {
-    /* Mobile: hidden by default, shown only via chat toggle if needed */
-}
-
-@media (min-width: 1024px) {
-    .game-panel-bottom {
-        grid-area: bottom;
-        background: #16213e;
-        border-radius: 12px;
-        padding: 20px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        max-height: 250px;
-    }
-    
-    .game-panel-bottom .chat-messages {
-        height: 120px;
-    }
-}
-
-/* -----------------------------------------------------------------------------
-   DESKTOP-SPECIFIC COMPONENT ADJUSTMENTS
-   
-   Fine-tune existing components when displayed in the desktop layout.
-   ----------------------------------------------------------------------------- */
-
-@media (min-width: 1024px) {
-    /* Timer - more prominent on desktop */
-    .game-layout .timer {
-        font-size: 1.8rem;
-        padding: 15px 30px;
-    }
-    
-    /* Topic display - larger on desktop */
-    .game-layout .topic-display {
-        padding: 20px;
-        margin-bottom: 25px;
-    }
-    
-    .game-layout .topic-display strong {
-        font-size: 1.8rem;
-    }
-    
-    /* Speaking order - horizontal layout on desktop */
-    .game-layout .speaking-order {
-        padding: 20px;
-    }
-    
-    .game-layout .order-list {
-        gap: 10px;
-    }
-    
-    /* Description form - wider textarea on desktop */
-    .game-layout .description-form textarea {
-        min-height: 100px;
-    }
-    
-    /* Vote buttons - can be in a grid on desktop */
-    .game-layout .vote-buttons {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 10px;
-    }
-    
-    .game-layout .vote-buttons button {
-        text-align: center;
-    }
-    
-    /* Confirm section - more padding on desktop */
-    .game-layout .confirm-section {
-        margin-top: 25px;
-        padding: 25px;
-    }
-    
-    /* Descriptions list - better readability on desktop */
-    .game-layout .descriptions-list li {
-        padding: 15px 20px;
-        font-size: 1rem;
-    }
-    
-    /* Results banner - larger on desktop */
-    .game-layout .result-banner {
-        padding: 30px;
-        margin-bottom: 25px;
-    }
-    
-    .game-layout .result-banner h3 {
-        font-size: 1.8rem;
-    }
-    
-    /* Result details - grid layout on desktop */
-    .game-layout .result-details {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 15px;
-    }
-    
-    .game-layout .detail-item {
-        margin-bottom: 0;
-    }
-}
-
-/* -----------------------------------------------------------------------------
-   DESKTOP PANEL VISIBILITY HELPERS
-   
-   Classes to show/hide content based on viewport.
-   Use these for elements that should only appear in certain panels on desktop.
-   ----------------------------------------------------------------------------- */
-
-/* Hide on mobile, show on desktop */
-.desktop-only {
-    display: none;
-}
-
-@media (min-width: 1024px) {
-    .desktop-only {
-        display: block;
-    }
-}
-
-/* Show on mobile, hide on desktop */
-@media (min-width: 1024px) {
-    .mobile-only {
-        display: none;
-    }
-}
-
-/* -----------------------------------------------------------------------------
-   SCROLLBAR STYLING FOR DESKTOP PANELS
-   ----------------------------------------------------------------------------- */
-
-@media (min-width: 1024px) {
-    .game-panel-left::-webkit-scrollbar,
-    .game-panel-right::-webkit-scrollbar,
-    .game-panel-bottom .chat-messages::-webkit-scrollbar {
-        width: 6px;
-    }
-    
-    .game-panel-left::-webkit-scrollbar-track,
-    .game-panel-right::-webkit-scrollbar-track,
-    .game-panel-bottom .chat-messages::-webkit-scrollbar-track {
-        background: #0f3460;
-        border-radius: 3px;
-    }
-    
-    .game-panel-left::-webkit-scrollbar-thumb,
-    .game-panel-right::-webkit-scrollbar-thumb,
-    .game-panel-bottom .chat-messages::-webkit-scrollbar-thumb {
-        background: #e94560;
-        border-radius: 3px;
-    }
-    
-    .game-panel-left::-webkit-scrollbar-thumb:hover,
-    .game-panel-right::-webkit-scrollbar-thumb:hover,
-    .game-panel-bottom .chat-messages::-webkit-scrollbar-thumb:hover {
-        background: #ff6b8a;
-    }
-}
-
-/* -----------------------------------------------------------------------------
-   V1.2: ADDITIONAL UI COMPONENTS FOR DESKTOP LAYOUT
-   ----------------------------------------------------------------------------- */
-
-/* Info box - used in right panel for instructions */
-.info-box {
-    background: #0f3460;
-    border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 15px;
-}
-
-.info-box p {
-    color: #aaa;
-    font-size: 0.9rem;
-    margin-bottom: 8px;
-    line-height: 1.5;
-}
-
-.info-box p:last-child {
-    margin-bottom: 0;
-}
-
-.info-box strong {
-    color: #e94560;
-}
-
-/* Phase info section */
-.phase-info {
-    margin-top: 20px;
-}
-
-.phase-info h3 {
-    font-size: 1rem;
-    color: #888;
-    margin-bottom: 10px;
-}
-
-/* Progress section in right panel */
-.progress-section {
-    margin-top: 20px;
-}
-
-.progress-section h3 {
-    font-size: 1rem;
-    color: #888;
-    margin-bottom: 10px;
-}
-
-/* Stats section in PostGame */
-.stats-section {
-    margin-top: 20px;
-}
-
-.stats-section h3 {
-    font-size: 1rem;
-    color: #888;
-    margin-bottom: 10px;
-}
-
-/* Room code highlight for invite section */
-.room-code-highlight {
-    font-size: 1.5rem;
-    letter-spacing: 3px;
-    text-align: center;
-    margin-top: 10px;
-}
-
-.room-code-highlight strong {
-    color: #e94560;
-}
-
-/* Left panel should be hidden on mobile (content is duplicated in center panel) */
-.game-panel-left {
-    display: none;
-}
-
-@media (min-width: 1024px) {
-    .game-panel-left {
-        display: block;
-    }
-}
-
-/* Host controls in right panel */
-@media (min-width: 1024px) {
-    .game-panel-right .host-controls {
-        margin-top: 15px;
-    }
-    
-    .game-panel-right .host-controls button {
-        width: 100%;
-    }
-    
-    .game-panel-right .waiting-message {
-        text-align: center;
-        color: #888;
-        font-style: italic;
-        margin-top: 15px;
-    }
-}
-
-/* Ensure vote buttons in left panel stack vertically */
-@media (min-width: 1024px) {
-    .game-panel-left .vote-buttons {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
-    
-    .game-panel-left .vote-buttons button {
-        text-align: left;
-    }
-    
-    .game-panel-left .confirm-section {
-        margin-top: 15px;
-        padding: 15px;
-    }
-    
-    .game-panel-left .voted-message {
-        margin-top: 15px;
-        padding: 15px;
-        background: #0f3460;
-        border-radius: 8px;
-        text-align: center;
-    }
-}
-
-/* Speaking order adjustments for left panel on desktop */
-@media (min-width: 1024px) {
-    .game-panel-left .speaking-order {
-        background: transparent;
-        padding: 0;
-    }
-    
-    .game-panel-left .speaking-order h3 {
-        margin-bottom: 15px;
-    }
-    
-    .game-panel-left .order-list {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    
-    .game-panel-left .speaker-item {
-        justify-content: flex-start;
-        padding: 10px 15px;
-        border-radius: 8px;
-    }
-}
-
-/* Player list adjustments for left panel on desktop */
-@media (min-width: 1024px) {
-    .game-panel-left .player-list {
-        margin-bottom: 0;
-    }
-    
-    .game-panel-left .player-list h3 {
-        margin-bottom: 15px;
-    }
-}
-
-/* Topic display adjustments for left panel on desktop */
-@media (min-width: 1024px) {
-    .game-panel-left .topic-display {
-        margin-bottom: 20px;
-    }
-}
-
-/* =============================================================================
-   V1.2: AVATAR COMPONENT STYLES
-   
-   DiceBear SVG avatars with states:
-   - Default: Circular with subtle border
-   - Speaking: Glow/pulse animation
-   - Disconnected: Grayscale filter
-   - Highlighted: Special border (imposter reveal)
-   ============================================================================= */
-
-.avatar {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    overflow: hidden;
-    background: #0f3460;
-    border: 2px solid #1a4a7a;
-    flex-shrink: 0;
-    transition: all 0.3s ease;
-}
-
-/* Ensure SVG fills the container properly */
-.avatar svg {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
-
-/* Speaking state - subtle glow and pulse */
-.avatar-speaking {
-    border-color: #e94560;
-    box-shadow: 0 0 15px rgba(233, 69, 96, 0.6);
-    animation: avatar-pulse 1.5s ease-in-out infinite;
-}
-
-@keyframes avatar-pulse {
-    0%, 100% {
-        box-shadow: 0 0 10px rgba(233, 69, 96, 0.4);
-    }
-    50% {
-        box-shadow: 0 0 20px rgba(233, 69, 96, 0.8);
-    }
-}
-
-/* Disconnected state - grayscale */
-.avatar-disconnected {
-    filter: grayscale(100%);
-    opacity: 0.5;
-    border-color: #444;
-}
-
-/* Highlighted state - special attention (e.g., imposter reveal) */
-.avatar-highlighted {
-    border-color: #e94560;
-    border-width: 3px;
-    box-shadow: 0 0 20px rgba(233, 69, 96, 0.7);
-}
-
-/* Avatar sizes - mobile default is smaller */
-.avatar-sm {
-    width: 28px !important;
-    height: 28px !important;
-    min-width: 28px !important;
-    min-height: 28px !important;
-}
-
-.avatar-md {
-    width: 40px !important;
-    height: 40px !important;
-    min-width: 40px !important;
-    min-height: 40px !important;
-}
-
-.avatar-lg {
-    width: 56px !important;
-    height: 56px !important;
-    min-width: 56px !important;
-    min-height: 56px !important;
-}
-
-/* Desktop: Slightly larger avatars */
-@media (min-width: 1024px) {
-    .avatar-sm {
-        width: 32px !important;
-        height: 32px !important;
-        min-width: 32px !important;
-        min-height: 32px !important;
-    }
-    
-    .avatar-md {
-        width: 48px !important;
-        height: 48px !important;
-        min-width: 48px !important;
-        min-height: 48px !important;
-    }
-    
-    .avatar-lg {
-        width: 64px !important;
-        height: 64px !important;
-        min-width: 64px !important;
-        min-height: 64px !important;
-    }
-}
-
-/* -----------------------------------------------------------------------------
-   AVATAR INTEGRATION INTO EXISTING COMPONENTS
-   ----------------------------------------------------------------------------- */
-
-/* Player list items with avatar */
-.player-list li {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.player-list .player-info {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-/* Speaker item with avatar */
-.speaker-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.speaker-item .avatar {
-    margin-right: 2px;
-}
-
-/* Chat message with avatar */
-.chat-message-with-avatar {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-}
-
-.chat-message-with-avatar .chat-content {
-    flex: 1;
-}
-
-.chat-message-with-avatar.own {
-    flex-direction: row-reverse;
-}
-
-.chat-message-with-avatar.own .chat-content {
-    text-align: right;
-}
-
-/* Vote button with avatar */
-.vote-button-with-avatar {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    width: 100%;
-    text-align: left;
-}
-
-.vote-button-with-avatar .player-name {
-    flex: 1;
-}
-
-.vote-button-with-avatar .check-mark {
-    color: #4ade80;
-    font-weight: bold;
-}
-
-/* =========================================================================
-   V1.3: TIE TRANSITION OVERLAY
-   Full-screen overlay shown when voting ends in a tie
-   ========================================================================= */
-
-.tie-transition-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(10, 10, 20, 0.95);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    animation: fadeInOverlay 0.3s ease-out;
-}
-
-@keyframes fadeInOverlay {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-.tie-transition-content {
-    text-align: center;
-    animation: scaleIn 0.4s ease-out;
-}
-
-@keyframes scaleIn {
-    from {
-        transform: scale(0.8);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-.tie-icon {
-    font-size: 5rem;
-    margin-bottom: 1rem;
-    animation: bounce 0.6s ease-out;
-}
-
-@keyframes bounce {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-20px);
-    }
-}
-
-.tie-transition-content h1 {
-    font-size: 3rem;
-    color: #fff;
-    margin: 0 0 0.5rem 0;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-}
-
-.tie-subtitle {
-    font-size: 1.3rem;
-    color: #a0d2db;
-    margin: 0 0 2rem 0;
-}
-
-.tie-spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid rgba(255, 255, 255, 0.2);
-    border-top-color: #4ade80;
-    border-radius: 50%;
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(190px, 240px) minmax(360px, 1fr) minmax(190px, 240px);
+    grid-template-areas: "left center right" "bottom bottom bottom";
+    gap: 18px;
+    width: min(1220px, 100%);
     margin: 0 auto;
-    animation: spin 1s linear infinite;
 }
-
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
+.game-panel-left { grid-area: left; }
+.game-panel-center { grid-area: center; min-width: 0; }
+.game-panel-right { grid-area: right; }
+.game-panel-bottom { grid-area: bottom; }
+.game-panel-left, .game-panel-right {
+    align-self: start;
+    padding: 18px;
+    background: rgba(255, 253, 248, .72);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
 }
+.game-panel-left > h3, .game-panel-right > h3 { font-size: 1rem; }
+.game-panel-center .page { min-height: 100%; }
+.container:has(.game-layout) { max-width: 1220px; }
+.phase-info { margin-top: 22px; }
+.info-box { padding: 13px; color: var(--muted); background: var(--surface-muted); border-left: 3px solid var(--line); font-size: .88rem; }
+.info-box p + p { margin-top: 8px; }
+.mobile-only { display: none; }
 
-/* Mobile adjustments */
-@media (max-width: 600px) {
-    .tie-icon {
-        font-size: 4rem;
-    }
-    
-    .tie-transition-content h1 {
-        font-size: 2rem;
-    }
-    
-    .tie-subtitle {
-        font-size: 1rem;
-        padding: 0 1rem;
-    }
-}
+.role { margin-bottom: 24px; padding: 30px 20px; text-align: center; border: 1px solid var(--line); border-radius: var(--radius); }
+.role.imposter { color: #fff; background: var(--accent); border-color: var(--accent); }
+.role.regular { background: var(--sage-light); border-color: #bcd0c0; }
+.role h3 { margin-bottom: 15px; }
+.role.imposter h3, .role.imposter p { color: #fff; }
+.role p { color: var(--muted); }
+.secret-word { margin: 18px 0; padding: 15px; background: rgba(255,255,255,.65); border-radius: var(--radius); }
+.secret-word span { display: block; color: var(--muted); font-size: .8rem; }
+.secret-word strong { color: var(--sage); font-family: Georgia, serif; font-size: 1.6rem; }
 
-/* Results player card with avatar */
-.result-player-card {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 15px;
-    background: #0f3460;
-    border-radius: 8px;
-    margin-bottom: 8px;
-}
-
-.result-player-card .player-details {
-    flex: 1;
-}
-
-.result-player-card.imposter {
-    border: 2px solid #e94560;
-    background: linear-gradient(135deg, #1a1a2e 0%, #2a1a2a 100%);
-}
-
-/* Vote summary list with avatars */
-.vote-summary ul li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.vote-summary ul li.imposter {
-    border: 1px solid #e94560;
-    background: linear-gradient(135deg, rgba(233, 69, 96, 0.1) 0%, rgba(139, 21, 56, 0.1) 100%);
-}
-
-.vote-summary .player-vote-info {
-    flex: 1;
-}
-
-/* Descriptions list with avatars */
-.descriptions-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-}
-
-.descriptions-list .description-content {
-    flex: 1;
-}
-
-/* Live descriptions with avatars */
-.live-descriptions li {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-}
-
-.live-descriptions .description-content {
-    flex: 1;
-}
-
-/* Chat message with avatar styling */
-.chat-message-with-avatar {
-    margin-bottom: 10px;
-    padding: 6px 0;
-}
-
-.chat-message-with-avatar .chat-content {
-    background: #0f3460;
-    padding: 8px 12px;
-    border-radius: 12px;
-    max-width: 80%;
-}
-
-.chat-message-with-avatar.own .chat-content {
-    background: #1a4a7a;
-}
-
-/* Player info span in lists */
-.player-info {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-/* =============================================================================
-   V1.2: IMPOSTER REVEAL CARD
-   
-   Dramatic reveal of the imposter at game end.
-   Features:
-   - Centered card layout
-   - Large avatar with glow animation
-   - Bold name typography
-   - Scale-in entrance animation
-   ============================================================================= */
-
-.imposter-reveal-card {
+.timer {
+    margin-bottom: 18px;
+    padding: 12px;
+    color: var(--ink);
+    background: var(--surface-muted);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    font-family: Georgia, serif;
+    font-size: 1.45rem;
+    font-weight: 700;
     text-align: center;
-    padding: 25px 20px;
-    margin: 20px 0;
-    background: linear-gradient(135deg, #1a1a2e 0%, #2a1a2a 100%);
-    border: 2px solid #e94560;
-    border-radius: 16px;
-    box-shadow: 0 0 30px rgba(233, 69, 96, 0.3);
-    animation: imposter-card-entrance 0.6s ease-out;
 }
-
-@keyframes imposter-card-entrance {
-    0% {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-    50% {
-        transform: scale(1.02);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
+.timer-warning { color: var(--accent-dark); background: #f9e5df; border-color: #e9bdb3; }
+.word-reminder, .imposter-reminder, .submitted-message, .progress, .voted-message {
+    margin-bottom: 20px;
+    padding: 13px;
+    text-align: center;
+    background: var(--sage-light);
+    border: 1px solid #c3d7c7;
+    border-radius: var(--radius);
 }
+.word-reminder strong { color: var(--sage); }
+.imposter-reminder { color: #8c3024; background: #f9e5df; border-color: #e9bdb3; }
+.submitted-message p:first-child, .voted-message p:first-child { margin-bottom: 5px; color: var(--sage); font-weight: 750; }
+.progress { color: var(--muted); background: var(--surface-muted); border-color: var(--line); }
+.current-speaker-banner { margin-bottom: 20px; padding: 14px; text-align: center; background: var(--surface-muted); border: 1px solid var(--line); border-radius: var(--radius); }
+.current-speaker-banner.your-turn { color: #fff; background: var(--accent); border-color: var(--accent); }
+.current-speaker-banner strong { color: inherit; }
 
-.imposter-reveal-card .reveal-label {
-    font-size: 1rem;
-    color: #aaa;
-    margin-bottom: 15px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+.speaking-order { margin-bottom: 20px; }
+.order-list { display: grid; gap: 4px; }
+.speaker-item { display: flex; align-items: center; gap: 7px; padding: 7px; border-radius: var(--radius); font-size: .86rem; }
+.speaker-item.current { color: var(--accent-dark); background: #f9e5df; }
+.speaker-item.done { color: var(--sage); background: var(--sage-light); }
+.speaker-item.is-me { box-shadow: inset 0 0 0 1px var(--accent); }
+.speaker-number { color: var(--muted); font-weight: 750; }
+.speaker-name { flex: 1; }
+.speaker-item .check { color: var(--sage); font-weight: 800; }
+.speaking { font-size: .8rem; }
+.live-descriptions { margin-top: 25px; padding-top: 20px; border-top: 1px solid var(--line); }
+.live-descriptions h3 { color: var(--muted); font-size: .95rem; }
+.live-descriptions li, .descriptions-list li { margin-bottom: 7px; padding: 12px; background: var(--surface-muted); border-left: 3px solid var(--line); font-style: italic; }
+.live-descriptions li strong, .descriptions-list li strong { color: var(--accent-dark); font-style: normal; }
+.live-descriptions li.auto-submit { opacity: .65; }
+.description-content {
+    display: inline-block;
+    max-width: calc(100% - 44px);
+    vertical-align: middle;
 }
-
-.imposter-avatar-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 15px;
-}
-
-.imposter-reveal-avatar {
-    border-width: 3px !important;
-    animation: imposter-avatar-glow 2s ease-in-out infinite;
-}
-
-@keyframes imposter-avatar-glow {
-    0%, 100% {
-        box-shadow: 0 0 20px rgba(233, 69, 96, 0.5);
-    }
-    50% {
-        box-shadow: 0 0 40px rgba(233, 69, 96, 0.8), 0 0 60px rgba(233, 69, 96, 0.4);
-    }
-}
-
-.imposter-reveal-card .imposter-name {
-    font-size: 1.8rem;
-    color: #e94560;
-    margin: 10px 0;
-    font-weight: bold;
-    text-shadow: 0 0 10px rgba(233, 69, 96, 0.5);
-}
-
-.imposter-reveal-card .secret-word-reveal {
-    font-size: 1rem;
-    color: #888;
-    margin-top: 15px;
-    padding-top: 15px;
-    border-top: 1px solid #333;
-}
-
-.imposter-reveal-card .secret-word-reveal strong {
-    color: #4ade80;
-    font-size: 1.1rem;
-}
-
-/* Desktop: Horizontal layout for imposter card */
-@media (min-width: 1024px) {
-    .imposter-reveal-card {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        gap: 30px;
-        padding: 30px 40px;
-    }
-    
-    .imposter-reveal-card .reveal-label {
-        position: absolute;
-        top: -12px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: #1a1a2e;
-        padding: 5px 15px;
-        border-radius: 20px;
-        border: 1px solid #e94560;
-        margin: 0;
-    }
-    
-    .imposter-avatar-container {
-        margin-bottom: 0;
-    }
-    
-    .imposter-reveal-card .imposter-name {
-        font-size: 2rem;
-        margin: 0;
-    }
-    
-    .imposter-reveal-card .secret-word-reveal {
-        margin: 0;
-        padding: 0 0 0 30px;
-        border-top: none;
-        border-left: 1px solid #333;
-    }
-    
-    /* Position wrapper for label */
-    .imposter-reveal-card {
-        position: relative;
-        margin-top: 30px;
-    }
-}
-
-/* Mobile: Keep vertical stacked layout */
-@media (max-width: 1023px) {
-    .imposter-reveal-card .imposter-name {
-        font-size: 1.5rem;
-    }
-    
-    .imposter-reveal-avatar {
-        width: 80px !important;
-        height: 80px !important;
-        min-width: 80px !important;
-        min-height: 80px !important;
-    }
-}
-
-/* =============================================================================
-   V1.2: KEYBOARD HINT STYLING
-   ============================================================================= */
-
+.description-form { margin-bottom: 20px; }
 .description-form .hint {
+    margin-top: 9px;
+    color: var(--muted);
+    font-size: .8rem;
     text-align: center;
-    color: #666;
-    font-size: 0.85rem;
-    margin-top: 10px;
 }
 
-/* =============================================================================
-   V1.2: GAME SETTINGS PANEL
-   ============================================================================= */
+.descriptions-list { margin-bottom: 25px; }
+.voting-section { margin-bottom: 22px; }
+.vote-buttons { display: grid; gap: 7px; }
+.vote-buttons button { width: 100%; text-align: left; }
+.vote-button-with-avatar { display: flex; align-items: center; gap: 10px; }
+.vote-button-with-avatar .player-name { flex: 1; }
+.vote-button-with-avatar .check-mark { color: var(--accent); font-weight: 800; }
+.vote-buttons button.selected { color: #fff; background: var(--accent); border-color: var(--accent); }
+.vote-buttons button.disabled { opacity: .4; }
+.confirm-section { margin-top: 16px; padding: 16px; text-align: center; background: #f9e5df; border: 1px solid #e9bdb3; border-radius: var(--radius); }
+.selection-preview { margin-bottom: 12px; }
+.selection-preview strong { color: var(--accent-dark); }
+.confirm-btn { width: 100%; }
+.selection-hint, .confirm-hint { margin-top: 13px; color: var(--muted); font-size: .83rem; font-style: italic; text-align: center; }
 
-.settings-panel {
-    background: #0f3460;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 20px 0;
+.voting-chat-container { display: flex; flex-direction: column; gap: 18px; }
+.chat-section { padding: 18px; background: rgba(255, 253, 248, .72); border: 1px solid var(--line); border-radius: var(--radius); }
+.chat-section h3 { margin-bottom: 12px; }
+.chat-messages { height: 165px; overflow-y: auto; margin-bottom: 11px; padding: 10px; background: var(--surface-muted); border: 1px solid var(--line); border-radius: var(--radius); }
+.chat-empty { padding: 25px 8px; color: var(--muted); text-align: center; font-size: .86rem; }
+.chat-message-with-avatar { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 10px; }
+.chat-message-with-avatar.own { flex-direction: row-reverse; text-align: right; }
+.chat-content { display: grid; gap: 1px; }
+.chat-sender { color: var(--accent-dark); font-size: .76rem; font-weight: 750; }
+.chat-text { font-size: .88rem; }
+.chat-input-form { display: flex; gap: 8px; }
+.chat-input-form input { min-width: 0; }
+.chat-input-form button { min-height: 42px; }
+.chat-error { margin-top: 6px; color: var(--accent-dark); font-size: .8rem; }
+
+.result-banner { margin-bottom: 20px; padding: 18px; text-align: center; border-radius: var(--radius); }
+.result-banner.players-win { color: #fff; background: var(--sage); }
+.result-banner.imposter-wins { color: #fff; background: var(--accent); }
+.result-banner h3 { color: inherit; margin: 0; font-size: 1.35rem; }
+.personal-result { margin-bottom: 20px; text-align: center; }
+.personal-result .win { color: var(--sage); font-weight: 800; }
+.personal-result .lose { color: var(--accent-dark); font-weight: 800; }
+.imposter-reveal-card { margin: 22px 0; padding: 22px; text-align: center; background: var(--surface-muted); border: 1px solid var(--line); border-radius: var(--radius); }
+.reveal-label { color: var(--muted); font-size: .75rem; font-weight: 750; letter-spacing: .1em; text-transform: uppercase; }
+.imposter-avatar-container { margin: 14px auto 8px; width: max-content; }
+.imposter-reveal-card .imposter-name { margin-bottom: 7px; font-size: 1.4rem; }
+.secret-word-reveal { color: var(--muted); }
+.secret-word-reveal strong { color: var(--ink); }
+.result-details { display: grid; gap: 7px; margin-bottom: 22px; }
+.detail-item { display: flex; justify-content: space-between; gap: 15px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: .88rem; }
+.detail-item span { color: var(--muted); }
+.detail-item strong { text-align: right; }
+.vote-summary li.imposter { color: var(--accent-dark); background: #f9e5df; }
+.player-vote-info { flex: 1; font-size: .86rem; }
+.imposter-tag { color: var(--accent); font-weight: 750; }
+.transition-hint, .restart-hint { margin-top: 24px; color: var(--muted); font-size: .82rem; font-style: italic; text-align: center; }
+
+.last-game-summary { padding: 18px; background: var(--surface-muted); border: 1px solid var(--line); border-radius: var(--radius); }
+.last-game-summary h3 { margin-bottom: 14px; font-size: 1rem; }
+.result-mini { margin-bottom: 14px; padding: 10px; color: #fff; border-radius: var(--radius); font-weight: 750; text-align: center; }
+.result-mini.players-win { background: var(--sage); }
+.result-mini.imposter-wins, .result-mini.host-ended-badge { background: var(--accent); }
+.summary-details { color: var(--muted); text-align: center; }
+.summary-details p + p { margin-top: 5px; }
+.summary-details strong { color: var(--ink); }
+.imposter-reveal-mini { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 10px 0; }
+.game-count { margin-bottom: 20px; padding: 10px; color: var(--muted); background: var(--surface-muted); border: 1px solid var(--line); border-radius: var(--radius); text-align: center; font-size: .85rem; }
+.invite-hint { margin-top: 20px; color: var(--muted); font-size: .85rem; text-align: center; }
+.play-again-btn { width: 100%; }
+
+.avatar { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; overflow: hidden; border-radius: 50%; background: var(--surface-muted); border: 1px solid var(--line); }
+.avatar svg { display: block; width: 100%; height: 100%; }
+.avatar-sm { width: 32px !important; height: 32px !important; }
+.avatar-md { width: 40px !important; height: 40px !important; }
+.avatar-lg { width: 60px !important; height: 60px !important; }
+.avatar-speaking { box-shadow: 0 0 0 3px rgba(201,84,61,.25); }
+.avatar-highlighted { box-shadow: 0 0 0 3px rgba(201,84,61,.4); }
+.avatar-disconnected { filter: grayscale(1); opacity: .5; }
+
+.end-game-button { position: absolute; top: -17px; right: 0; min-height: 34px; padding: 5px 10px; color: var(--accent-dark); background: transparent; border: 0; font-size: .75rem; }
+.end-game-button:hover { background: #f9e5df; }
+.end-game-modal-overlay, .tie-transition-overlay { position: fixed; inset: 0; z-index: 10; display: grid; place-items: center; padding: 20px; background: rgba(32,35,38,.58); }
+.end-game-modal { width: min(420px, 100%); padding: 28px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+.end-game-modal h3 { margin-bottom: 12px; font-family: Georgia, serif; font-size: 1.4rem; }
+.end-game-modal p { margin-bottom: 8px; color: var(--muted); }
+.warning-text { color: var(--accent-dark) !important; }
+.modal-buttons { display: flex; justify-content: flex-end; gap: 8px; margin-top: 22px; }
+.confirm-end-btn { color: #fff; background: var(--accent); border-color: var(--accent); }
+
+.tie-transition-content { padding: 36px; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); text-align: center; }
+.tie-icon { margin-bottom: 10px; color: var(--accent); font-size: 2.2rem; }
+.tie-transition-content h1 { margin-bottom: 7px; font-family: Georgia, serif; }
+.tie-subtitle { color: var(--muted); }
+.tie-spinner { width: 22px; height: 22px; margin: 20px auto 0; border: 2px solid var(--line); border-top-color: var(--accent); border-radius: 50%; animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 1023px) {
+    .app { padding: 18px 12px; }
+    .game-layout { display: flex; flex-direction: column; gap: 14px; padding-top: 22px; }
+    .game-panel-left, .game-panel-right, .game-panel-bottom { width: 100%; }
+    .game-panel-left { order: 2; }
+    .game-panel-center { order: 1; }
+    .game-panel-right { order: 3; }
+    .game-panel-bottom { order: 4; }
+    .desktop-only { display: none !important; }
+    .mobile-only { display: block; }
 }
 
-.settings-panel h3 {
-    margin-bottom: 15px;
-    color: #fff;
-    font-size: 1rem;
-}
-
-.settings-error {
-    background: rgba(233, 69, 96, 0.2);
-    color: #e94560;
-    padding: 8px 12px;
-    border-radius: 6px;
-    margin-bottom: 12px;
-    font-size: 0.85rem;
-}
-
-.settings-form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.setting-row {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.setting-row label {
-    color: #aaa;
-    font-size: 0.9rem;
-}
-
-.setting-input-group {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.setting-input-group input[type="number"] {
-    width: 80px;
-    padding: 8px 12px;
-    border: 2px solid #1a1a2e;
-    border-radius: 6px;
-    background: #1a1a2e;
-    color: #fff;
-    font-size: 1rem;
-    text-align: center;
-    outline: none;
-    transition: border-color 0.2s;
-}
-
-.setting-input-group input[type="number"]:focus {
-    border-color: #e94560;
-}
-
-/* Hide number input spinners on some browsers for cleaner look */
-.setting-input-group input[type="number"]::-webkit-inner-spin-button,
-.setting-input-group input[type="number"]::-webkit-outer-spin-button {
-    opacity: 1;
-}
-
-.setting-unit {
-    color: #888;
-    font-size: 0.9rem;
-}
-
-.setting-hint {
-    color: #666;
-    font-size: 0.75rem;
-}
-
-.apply-settings-btn {
-    margin-top: 4px;
-    padding: 8px 16px;
-    font-size: 0.9rem;
-}
-
-.apply-settings-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-/* Read-only settings display (for non-hosts) */
-.settings-readonly {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.setting-display {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.setting-display:last-child {
-    border-bottom: none;
-}
-
-.setting-label {
-    color: #aaa;
-    font-size: 0.9rem;
-}
-
-.setting-value {
-    color: #fff;
-    font-weight: 600;
-    font-size: 0.95rem;
-}
-
-/* Lobby-specific adjustments */
-.lobby .settings-panel {
-    margin-top: 20px;
-}
-
-/* Desktop panel adjustments */
-.game-panel-right .settings-panel {
-    margin: 15px 0;
-    padding: 15px;
-}
-
-.game-panel-right .settings-panel h3 {
-    font-size: 0.9rem;
-    margin-bottom: 12px;
-}
-
-.game-panel-right .setting-row {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.game-panel-right .setting-row label {
-    font-size: 0.85rem;
-}
-
-.game-panel-right .setting-input-group input[type="number"] {
-    width: 60px;
-    padding: 6px 8px;
-    font-size: 0.9rem;
-}
-
-.game-panel-right .setting-hint {
-    display: none; /* Hide hints in compact mode */
-}
-
-.game-panel-right .apply-settings-btn {
-    padding: 6px 12px;
-    font-size: 0.85rem;
-}
-
-/* =================================================================
-   END GAME BUTTON STYLES
-   ================================================================= */
-
-/* End Game Button */
-.end-game-button {
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    z-index: 100;
-    padding: 8px 16px;
-    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
-}
-
-.end-game-button:hover {
-    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
-}
-
-.end-game-button:active {
-    transform: translateY(0);
-}
-
-/* End Game Modal Overlay */
-.end-game-modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    backdrop-filter: blur(4px);
-    animation: fadeIn 0.2s ease;
-}
-
-/* End Game Modal */
-.end-game-modal {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    border: 2px solid #dc2626;
-    border-radius: 16px;
-    padding: 30px;
-    max-width: 400px;
-    width: 90%;
-    text-align: center;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    animation: modalSlideIn 0.3s ease;
-}
-
-@keyframes modalSlideIn {
-    from {
-        opacity: 0;
-        transform: scale(0.9) translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-    }
-}
-
-.end-game-modal h3 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-    color: #fff;
-}
-
-.end-game-modal p {
-    color: #aaa;
-    margin-bottom: 25px;
-    line-height: 1.5;
-}
-
-.end-game-modal-buttons {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-}
-
-.confirm-end-btn {
-    padding: 12px 24px;
-    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.confirm-end-btn:hover {
-    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-    transform: translateY(-1px);
-}
-
-.cancel-btn {
-    padding: 12px 24px;
-    background: transparent;
-    color: #aaa;
-    border: 2px solid #444;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.cancel-btn:hover {
-    border-color: #666;
-    color: #fff;
-    background: rgba(255, 255, 255, 0.05);
-}
-
-/* Host Ended Game - PostGame Styles */
-.last-game-summary.host-ended {
-    border-color: #dc2626;
-    background: linear-gradient(135deg, rgba(220, 38, 38, 0.1) 0%, rgba(139, 21, 56, 0.1) 100%);
-}
-
-.result-mini.host-ended-badge {
-    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-    color: white;
-}
-
-.imposter-reveal-mini {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    margin: 15px 0;
-}
-
-.imposter-reveal-mini strong {
-    font-size: 1.3rem;
-    color: #e94560;
-}
-
-/* Desktop adjustments for end game button */
-@media (min-width: 1024px) {
-    .end-game-button {
-        top: 20px;
-        right: 20px;
-        padding: 10px 20px;
-    }
-}
-
-/* Mobile adjustments */
-@media (max-width: 600px) {
-    .end-game-button {
-        top: 10px;
-        right: 10px;
-        padding: 6px 12px;
-        font-size: 0.8rem;
-    }
-    
-    .end-game-modal {
-        padding: 20px;
-        margin: 15px;
-    }
-    
-    .end-game-modal h3 {
-        font-size: 1.3rem;
-    }
-    
-    .end-game-modal-buttons {
-        flex-direction: column;
-    }
+@media (max-width: 540px) {
+    .page { padding: 22px 18px; }
+    .settings-readonly { grid-template-columns: 1fr; }
+    .chat-input-form { flex-wrap: wrap; }
+    .chat-input-form input { flex: 1 1 100%; }
+    .chat-input-form button { width: 100%; }
+    .end-game-button { right: 0; }
 }

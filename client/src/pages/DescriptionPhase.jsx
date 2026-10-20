@@ -104,7 +104,7 @@ export default function DescriptionPhase() {
                                         {isMe && ' (You)'}
                                     </span>
                                     {hasSpokenAlready && <span className="check">✓</span>}
-                                    {isCurrent && !hasSpokenAlready && <span className="speaking">🎤</span>}
+                                    {isCurrent && !hasSpokenAlready && <span className="speaking">Speaking</span>}
                                 </div>
                             );
                         })}
@@ -124,7 +124,7 @@ export default function DescriptionPhase() {
                     <div className="mobile-only">
                         {timer.phase === 'descriptionTurn' && timer.remainingSeconds > 0 && (
                             <div className={`timer ${timer.remainingSeconds <= 3 ? 'timer-warning' : ''}`}>
-                                ⏱️ {timer.remainingSeconds}s
+                                {timer.remainingSeconds}s
                             </div>
                         )}
                     </div>
@@ -147,7 +147,7 @@ export default function DescriptionPhase() {
                     
                     {isImposter && (
                         <div className="imposter-reminder">
-                            🎭 You are the imposter - guess the word!
+                            You are the imposter — infer the word.
                         </div>
                     )}
                     
@@ -178,7 +178,7 @@ export default function DescriptionPhase() {
                                                 {isMe && ' (You)'}
                                             </span>
                                             {hasSpokenAlready && <span className="check">✓</span>}
-                                            {isCurrent && !hasSpokenAlready && <span className="speaking">🎤</span>}
+                                            {isCurrent && !hasSpokenAlready && <span className="speaking">Speaking</span>}
                                         </div>
                                     );
                                 })}
@@ -190,7 +190,7 @@ export default function DescriptionPhase() {
                     {currentSpeaker && (
                         <div className={`current-speaker-banner ${isMyTurn ? 'your-turn' : ''}`}>
                             {isMyTurn ? (
-                                <strong>🎤 Your turn to speak!</strong>
+                                <strong>Your turn to speak</strong>
                             ) : (
                                 <span>Waiting for <strong>{currentSpeaker.name}</strong> to speak...</span>
                             )}
@@ -237,14 +237,14 @@ export default function DescriptionPhase() {
                     {/* Waiting message for non-current players */}
                     {!isMyTurn && !hasSpoken && (
                         <div className="waiting-message">
-                            <p>👀 Watch the descriptions and prepare yours!</p>
+                            <p>Watch the descriptions and prepare yours.</p>
                         </div>
                     )}
                     
                     {/* Already spoken message */}
                     {hasSpoken && (
                         <div className="submitted-message">
-                            <p>✅ You have spoken!</p>
+                            <p>You have spoken</p>
                             <p>Waiting for other players...</p>
                         </div>
                     )}
@@ -284,7 +284,7 @@ export default function DescriptionPhase() {
                 Timer, phase instructions, progress indicator
                 ================================================================= */}
             <div className="game-panel-right desktop-only">
-                <h3>⏱️ Turn Timer</h3>
+                <h3>Turn timer</h3>
                 {timer.phase === 'descriptionTurn' && timer.remainingSeconds > 0 ? (
                     <div className={`timer ${timer.remainingSeconds <= 3 ? 'timer-warning' : ''}`}>
                         {timer.remainingSeconds}s

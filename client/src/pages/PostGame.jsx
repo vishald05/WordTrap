@@ -99,7 +99,7 @@ export default function PostGame() {
                 ================================================================= */}
             <div className="game-panel-left">
                 <div className="player-list">
-                    <h3>👥 Players ({room.playerCount})</h3>
+                    <h3>Players ({room.playerCount})</h3>
                     <ul>
                         {room.players.map((p) => (
                             <li key={p.id} className={p.id === player?.id ? 'you' : ''}>
@@ -110,7 +110,7 @@ export default function PostGame() {
                                 />
                                 <span className="player-info">
                                     {p.name}
-                                    {p.id === room.hostId && <span className="host-badge">👑 Host</span>}
+                                    {p.id === room.hostId && <span className="host-badge">Host</span>}
                                     {p.id === player?.id && <span className="you-badge">(You)</span>}
                                 </span>
                             </li>
@@ -124,7 +124,7 @@ export default function PostGame() {
                 ================================================================= */}
             <div className="game-panel-center">
                 <div className="page post-game">
-                    <h2>{hostEndedGame ? '🛑 Game Ended by Host' : '🎮 Game Complete!'}</h2>
+                    <h2>{hostEndedGame ? 'Game ended by host' : 'Game complete'}</h2>
                     
                     {error && (
                         <div className="error">{error}</div>
@@ -156,7 +156,7 @@ export default function PostGame() {
                         <div className="last-game-summary">
                             <h3>Last Game Results</h3>
                             <div className={`result-mini ${results.playersWin ? 'players-win' : 'imposter-wins'}`}>
-                                {results.playersWin ? '🎉 Players Won!' : '🎭 Imposter Won!'}
+                                {results.playersWin ? 'Players won' : 'Imposter won'}
                             </div>
                             <div className="summary-details">
                                 <p>Imposter: <strong>{results.imposter.name}</strong></p>
@@ -193,7 +193,7 @@ export default function PostGame() {
                                         />
                                         <span className="player-info">
                                             {p.name}
-                                            {p.id === room.hostId && <span className="host-badge">👑 Host</span>}
+                                            {p.id === room.hostId && <span className="host-badge">Host</span>}
                                             {p.id === player?.id && <span className="you-badge">(You)</span>}
                                         </span>
                                     </li>
@@ -209,7 +209,7 @@ export default function PostGame() {
                                     className="primary play-again-btn"
                                     disabled={!canStartGame}
                                 >
-                                    🔄 Play Again
+                                    Play again
                                 </button>
                                 {!canStartGame && (
                                     <p className="waiting-message">
@@ -225,7 +225,7 @@ export default function PostGame() {
                         
                         {/* V1.2: Game Settings (mobile) */}
                         <div className="settings-panel">
-                            <h3>⚙️ Game Settings</h3>
+                            <h3>Game settings</h3>
                             
                             {isHost ? (
                                 <>
@@ -300,7 +300,7 @@ export default function PostGame() {
                 RIGHT PANEL - Host Controls & Invite (Desktop only)
                 ================================================================= */}
             <div className="game-panel-right desktop-only">
-                <h3>🎮 Next Game</h3>
+                <h3>Next game</h3>
                 
                 {/* Host controls */}
                 {isHost ? (
@@ -310,7 +310,7 @@ export default function PostGame() {
                             className="primary play-again-btn"
                             disabled={!canStartGame}
                         >
-                            🔄 Play Again
+                            Play again
                         </button>
                         {!canStartGame && (
                             <p className="waiting-message">
@@ -326,7 +326,7 @@ export default function PostGame() {
                 
                 {/* V1.2: Game Settings Panel */}
                 <div className="settings-panel">
-                    <h3>⚙️ Game Settings</h3>
+                    <h3>Game settings</h3>
                     
                     {isHost ? (
                         <>
