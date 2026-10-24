@@ -1,14 +1,13 @@
 /**
- * Main App Component (V1.2)
+ * Main App Component
  * 
- * Renders the appropriate page based on the current game phase.
- * Phase changes are driven entirely by server events.
- * 
- * V1.2: Added GameLayout wrapper for responsive desktop layout.
- * - Game phases (roleReveal, description, voting, results, postGame) use GameLayout
- * - Home and Lobby pages use the standard container layout
+ * Top-level mode controller:
+ * - Landing Page: choose between Pass & Play (same device) and Online Multiplayer
+ * - Pass & Play: entirely local, phone-friendly game flow
+ * - Online: existing server-authoritative multiplayer flow
  */
 
+import React, { useState } from 'react';
 import { useGame } from './GameContext';
 import GameLayout from './components/GameLayout';
 import TieTransition from './components/TieTransition';
@@ -19,19 +18,52 @@ import DescriptionPhase from './pages/DescriptionPhase';
 import VotingPhase from './pages/VotingPhase';
 import Results from './pages/Results';
 import PostGame from './pages/PostGame';
+
+import LandingScreen from './passAndPlay/screens/LandingScreen';
+import { PassAndPlayProvider } from './passAndPlay/PassAndPlayContext';
+import PassAndPlayApp from './passAndPlay/PassAndPlayApp';
+
 import './App.css';
 
 export default function App() {
     const { room, phase } = useGame();
+    // Mode state: null (landing), 'passAndPlay', 'online'
+    const [selectedMode, setSelectedMode] = useState(null);
 
-    // Render the appropriate page based on game phase
-    const renderPage = () => {
-        // If no room, show home page
+    // If an online room is active, force online mode
+    const mode = room ? 'online' : selectedMode;
+
+    // Render Landing Page if no mode is selected
+    if (!mode) {
+        return (
+            <div className="app">
+                <div className="container">
+                    <LandingScreen
+                        onSelectPassAndPlay={() => setSelectedMode('passAndPlay')}
+                        onSelectOnline={() => setSelectedMode('online')}
+                    />
+                </div>
+            </div>
+        );
+    }
+
+    // Render Pass & Play
+    if (mode === 'passAndPlay') {
+        return (
+            <div className="app pap-mode-active">
+                <PassAndPlayProvider onExitToMenu={() => setSelectedMode(null)}>
+                    <PassAndPlayApp />
+                </PassAndPlayProvider>
+            </div>
+        );
+    }
+
+    // Otherwise, render existing Online Multiplayer flow
+    const renderOnlinePage = () => {
         if (!room) {
-            return <Home />;
+            return <Home onBackToLanding={() => setSelectedMode(null)} />;
         }
 
-        // Otherwise, render based on phase
         switch (phase) {
             case 'lobby':
                 return <Lobby />;
@@ -46,25 +78,24 @@ export default function App() {
             case 'postGame':
                 return <PostGame />;
             default:
-                return <Home />;
+                return <Home onBackToLanding={() => setSelectedMode(null)} />;
         }
     };
 
-    // Check if current phase should use the game layout
     const isGamePhase = room && ['roleReveal', 'description', 'voting', 'results', 'postGame'].includes(phase);
 
     return (
         <div className="app">
-            {/* V1.3: Tie transition overlay - shows on top of everything */}
+            {/* V1.3: Tie transition overlay - shows on top of everything in online mode */}
             <TieTransition />
             
             <div className="container">
                 {isGamePhase ? (
                     <GameLayout>
-                        {renderPage()}
+                        {renderOnlinePage()}
                     </GameLayout>
                 ) : (
-                    renderPage()
+                    renderOnlinePage()
                 )}
             </div>
         </div>

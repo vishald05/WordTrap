@@ -9,7 +9,7 @@
 import { useState } from 'react';
 import { useGame } from '../GameContext';
 
-export default function Home() {
+export default function Home({ onBackToLanding }) {
     const { createRoom, joinRoom, error, clearError, isConnected } = useGame();
     
     const [playerName, setPlayerName] = useState('');
@@ -49,6 +49,26 @@ export default function Home() {
 
     return (
         <div className="page home">
+            {onBackToLanding && (
+                <button 
+                    type="button"
+                    onClick={onBackToLanding}
+                    className="back-to-modes-btn"
+                    style={{
+                        marginBottom: '16px',
+                        background: 'transparent',
+                        border: '1px solid var(--line)',
+                        color: 'var(--muted)',
+                        fontSize: '0.82rem',
+                        fontWeight: '600',
+                        borderRadius: 'var(--radius)',
+                        padding: '6px 12px',
+                        cursor: 'pointer'
+                    }}
+                >
+                    ← Back to Mode Selection
+                </button>
+            )}
             <h1>Who Is Lying?</h1>
             
             {!isConnected && (
